@@ -1,2 +1,2 @@
-kotlinc Message.kt -include-runtime -d minecraft-client.jar
+kotlinc src -include-runtime -d minecraft-client.jar
 java -jar minecraft-client.jar
