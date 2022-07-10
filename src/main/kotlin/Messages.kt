@@ -19,7 +19,7 @@ enum class MessageType(val value: Int) {
 class Message {
     var length = 0
     var id = 0
-    var type = MessageType.valueOf("RESPONSE")
+    var type = MessageType.RESPONSE
     var body = ""
 }
 
