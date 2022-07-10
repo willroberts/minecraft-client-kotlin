@@ -27,9 +27,9 @@ class Message {
 // Format: [4-byte message size | 4-byte message ID | 4-byte message type | variable length message | 2-byte terminator].
 fun encodeMessage(msg: Message): ByteArray {
     return encoded = byteArrayOf(
-        msg.length.toByte(), // OK!
-        msg.id.toByte(), // OK!
-        msg.type.value.toByte(), // OK!
+        msg.length.toByte(),
+        msg.id.toByte(),
+        msg.type.value.toByte(),
     ) + msg.body.toByteArray() + byteArrayOf(0, 0)
 }
 
