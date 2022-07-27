@@ -35,7 +35,7 @@ public class MinecraftRCONClient(host: String, port: Int) {
         val respSize: Int = lengthBuf.getInt()
         lengthBuf.flip()
 
-        // Read and return the response.
+        // Read the response bytes.
         val respBuf: ByteBuffer = ByteBuffer.allocate(respSize+4).put(lengthBuf)
         respBuf.order(ByteOrder.LITTLE_ENDIAN)
         respBuf.put(conn.inputStream.readNBytes(respSize))
@@ -43,6 +43,7 @@ public class MinecraftRCONClient(host: String, port: Int) {
         val respBytes: ByteArray = ByteArray(respSize+4)
         respBuf.get(respBytes, 0, respBytes.size)
 
+        // Decode and return the response.
         val decoded: Message = decodeMessage(respBytes)
         return decoded
     }
