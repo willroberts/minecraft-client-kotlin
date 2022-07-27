@@ -1,4 +1,4 @@
-kotlinc src -include-runtime -d minecraft-client.jar
+kotlinc src/main -include-runtime -d minecraft-client.jar
 if ($LASTEXITCODE -ne 0) {
     throw 'build failed'
 }

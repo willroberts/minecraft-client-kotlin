@@ -1,1 +1,1 @@
-kotlinc src -include-runtime -d minecraft-client.jar
+kotlinc src/main -include-runtime -d minecraft-client.jar
