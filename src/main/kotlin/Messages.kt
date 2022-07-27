@@ -59,26 +59,3 @@ fun parseInt(b: ByteArray): Int {
     }
     return result
 }
-
-// Testing for now.
-fun main() {
-    // Test encodeMessage().
-    var msg = Message()
-    msg.id = 1
-    msg.type = MessageType.COMMAND
-    msg.body = "seed"
-    msg.length = msg.body.length + HEADER_SIZE
-    encodeMessage(msg)
-
-    // Test decodeMessage():
-    decodeMessage(byteArrayOf(
-		// Response length: 38 bytes.
-		38, 0, 0, 0,
-		// Request ID: 2.
-		2, 0, 0, 0,
-		// Response type: 0 (msgResponse).
-		0, 0, 0, 0,
-		// Message: "Seed: [-2474125574890692308]".
-		83, 101, 101, 100, 58, 32, 91, 45, 50, 52, 55, 52, 49, 50, 53, 53, 55, 52, 56, 57, 48, 54, 57, 50, 51, 48, 56, 93
-    ))
-}
