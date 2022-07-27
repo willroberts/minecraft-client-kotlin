@@ -1,5 +1,8 @@
 package com.github.willroberts.minecraftclient
 
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
+
 // 4-byte request ID, 4-byte message type, 2-byte terminator.
 const val HEADER_SIZE: Int = 10
 
@@ -31,11 +34,19 @@ class Message {
 // encodeMessage serializes an RCON command.
 // Format: [4-byte message size | 4-byte message ID | 4-byte message type | variable length message | 2-byte terminator].
 fun encodeMessage(msg: Message): ByteArray {
-    return byteArrayOf(
-        msg.length.toByte(),
-        msg.id.toByte(),
-        msg.type.value.toByte(),
-    ) + msg.body.toByteArray() + byteArrayOf(0, 0)
+    var buf: ByteBuffer = ByteBuffer.allocate(msg.length + 4)
+    buf.order(ByteOrder.LITTLE_ENDIAN)
+    buf.putInt(msg.length)
+    buf.putInt(msg.id)
+    buf.putInt(msg.type.value)
+    buf.put(msg.body.toByteArray())
+    buf.put(byteArrayOf(0, 0))
+    buf.flip()
+
+    var bytes: ByteArray = ByteArray(msg.length + 4)
+    buf.get(bytes, 0, bytes.size)
+
+    return bytes
 }
 
 // decodeMessage deserialize an RCON response.

@@ -1,6 +1,7 @@
 package com.github.willroberts.minecraftclient
 
 import org.junit.Test
+import kotlin.collections.contentEquals
 import kotlin.test.assertEquals
 
 class MessageEncoderTest {
@@ -25,7 +26,7 @@ class MessageEncoderTest {
 		    // Terminator.
 		    0, 0,            
         )
-        assertEquals(output.length, expected.length)
+        assertEquals(expected.contentEquals(output), true)
     }
 
     @Test
@@ -40,9 +41,9 @@ class MessageEncoderTest {
             // Message: "Seed: [-2474125574890692308]".
             83, 101, 101, 100, 58, 32, 91, 45, 50, 52, 55, 52, 49, 50, 53, 53, 55, 52, 56, 57, 48, 54, 57, 50, 51, 48, 56, 93
         ))
-        assertEquals(output.id, 2)
-        assertEquals(output.type, MessageType.RESPONSE)
-        assertEquals(output.body, "Seed: [-2474125574890692308]")
-        assertEquals(output.length, 38)
+        assertEquals(2, output.id)
+        assertEquals(MessageType.RESPONSE, output.type)
+        assertEquals("Seed: [-2474125574890692308]", output.body)
+        assertEquals(38, output.length)
     }
 }
