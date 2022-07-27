@@ -7,9 +7,7 @@ A client for the Minecraft RCON protocol.
 ## Library Usage
 
 ```kotlin
-try {
-    val client = MinecraftRCONClient("127.0.0.1", 25575)
-} catch(exception: Exception) { /* Failed to connect. */ }
+val client = MinecraftRCONClient("127.0.0.1", 25575)
 
 try {
     client.authenticate("minecraft")
@@ -28,9 +26,15 @@ $ docker pull itzg/minecraft-server
 $ docker run --name=minecraft-server -p 25575:25575 -d -e EULA=TRUE itzg/minecraft-server
 ```
 
+## Building the code
+
+```
+$ gradle build
+```
+
 ## Running Tests
 
-```bash
+```
 $ gradle test
 ```
 
