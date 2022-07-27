@@ -3,9 +3,11 @@ package com.github.willroberts.minecraftclient
 import java.net.Socket
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
+import java.util.concurrent.atomic.AtomicInteger
 
 public class MinecraftRCONClient(host: String, port: Int) {
     val conn = Socket(host, port)
+    val lastId = AtomicInteger(0)
 
     public fun authenticate(password: String) {
         sendMessage(MessageType.AUTHENTICATE, password)
@@ -19,7 +21,7 @@ public class MinecraftRCONClient(host: String, port: Int) {
         // Construct the request.
         var message: Message = Message()
         message.length = body.length + HEADER_SIZE
-        message.id = 1 // TODO: Increment local counter.
+        message.id = lastId.addAndGet(1)
         message.type = messageType
         message.body = body
         val bytes: ByteArray = encodeMessage(message)
