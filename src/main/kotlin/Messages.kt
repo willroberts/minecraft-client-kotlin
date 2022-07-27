@@ -4,10 +4,10 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
 // 4-byte request ID, 4-byte message type, 2-byte terminator.
-const val HEADER_SIZE: Int = 10
+public const val HEADER_SIZE: Int = 10
 
 // MessageType is an Int representing the type of message being sent or received.
-enum class MessageType(val value: Int) {
+public enum class MessageType(val value: Int) {
     // Returned by the server.
     RESPONSE(0),
 
@@ -24,7 +24,7 @@ enum class MessageType(val value: Int) {
 }
 
 // Message contains fields for RCON messages.
-class Message {
+public class Message {
     var length = 0
     var id = 0
     var type = MessageType.RESPONSE
@@ -33,7 +33,7 @@ class Message {
 
 // encodeMessage serializes an RCON command.
 // Format: [4-byte message size | 4-byte message ID | 4-byte message type | variable length message | 2-byte terminator].
-fun encodeMessage(msg: Message): ByteArray {
+public fun encodeMessage(msg: Message): ByteArray {
     var buf: ByteBuffer = ByteBuffer.allocate(msg.length + 4)
     buf.order(ByteOrder.LITTLE_ENDIAN)
     buf.putInt(msg.length)
@@ -51,7 +51,7 @@ fun encodeMessage(msg: Message): ByteArray {
 
 // decodeMessage deserialize an RCON response.
 // Format: [4-byte message size | 4-byte message ID | 4-byte message type | variable length message].
-fun decodeMessage(msg: ByteArray): Message {
+public fun decodeMessage(msg: ByteArray): Message {
     var resp = Message()
 
     resp.length = parseInt(msg.sliceArray(IntRange(0, 3)))

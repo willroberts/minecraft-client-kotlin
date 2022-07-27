@@ -7,20 +7,19 @@ A client for the Minecraft RCON protocol.
 ## Library Usage
 
 ```kotlin
-TBD
+try {
+    val client = MinecraftRCONClient("127.0.0.1", 25575)
+} catch(exception: Exception) { /* Failed to connect. */ }
+
+try {
+    client.authenticate("minecraft")
+} catch(exception: Exception) { /* Failed to log in. */ }
+
+try {
+    val resp: Message = client.sendCommand("seed")
+    println("${resp.body}") // "Seed: [5454567064266725003]"
+} catch(exception: Exception) { /* Failed to send command. */ }
 ```
-
-## Shell Utility
-
-If you are looking for a tool rather than a library, try the shell command:
-
-```
-TBD
-```
-
-## Limitations
-
-Response bodies over 4KB will be truncated.
 
 ## Starting a server for testing
 
@@ -31,8 +30,8 @@ $ docker run --name=minecraft-server -p 25575:25575 -d -e EULA=TRUE itzg/minecra
 
 ## Running Tests
 
-```
-TBD
+```bash
+$ gradle test
 ```
 
 ## Reference
