@@ -22,6 +22,9 @@ jobs:
     - name: configure gradle
       run: chmod +x gradlew
     - name: build code
+      # TODO:
+      # - Cache builds: https://github.com/actions/cache/blob/main/examples.md#java---gradle
+      # - Or disable the Gradle daemon: https://docs.gradle.org/current/userguide/gradle_daemon.html#sec:disabling_the_daemon
       run: ./gradlew build
     - name: test code
       run: ./gradlew test
