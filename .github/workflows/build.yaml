@@ -1,0 +1,27 @@
+name: build
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: install the jvm
+      uses: actions/setup-java@v3
+      with:
+        distribution: adopt
+        java-version: 17
+    - name: check out code
+      uses: actions/checkout@v3
+    - name: install gradle
+      uses: gradle/gradle-build-action@v2
+    - name: configure gradle
+      run: chmod +x gradlew
+    - name: build code
+      run: ./gradlew build
+    - name: test code
+      run: ./gradlew test
