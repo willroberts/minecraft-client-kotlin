@@ -19,6 +19,8 @@ jobs:
       uses: actions/checkout@v3
     - name: install gradle
       uses: gradle/gradle-build-action@v2
+    - name: configure gradle
+      run: chmod +x gradlew
     - name: build code
       run: ./gradlew build
     - name: test code
