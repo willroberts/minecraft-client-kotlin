@@ -1,6 +1,7 @@
 # minecraft-client-kotlin
 
 [![License Badge]][License]
+[![Build Badge]][Build]
 
 A client for the Minecraft RCON protocol.
 
@@ -44,3 +45,5 @@ $ gradle test
 
 [License]: https://www.gnu.org/licenses/gpl-3.0
 [License Badge]: https://img.shields.io/badge/License-GPLv3-blue.svg
+[Build]: https://github.com/willroberts/minecraft-client-kotlin/actions/workflows/build.yaml
+[Build Badge]: https://github.com/willroberts/minecraft-client-kotlin/actions/workflows/build.yaml/badge.svg
